@@ -1,0 +1,255 @@
+/* Ajustes gerais do corpo */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+/* Estilo para a barra de navegação */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-item {
+    color: #fff;
+    margin: 0 10px; /* Diminui ainda mais o espaçamento lateral dos itens */
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: #444;
+    color: #ddd;
+}
+
+.nav-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Container principal */
+main {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%; /* Limita ainda mais o conteúdo */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Container principal do calendário */
+.calendar-container {
+    max-width: 250px; /* Reduzido para um layout bem compacto */
+    margin: 20px auto; /* Centralizado com margens ainda mais reduzidas */
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; /* Reduzido */
+    transition: transform 0.3s ease;
+}
+
+.calendar-container:hover {
+    transform: scale(1.02);
+}
+
+/* Cabeçalho do calendário */
+.calendar-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    width: 100%;
+    padding: 10px; /* Ajustado */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.calendar-title {
+    font-size: 1.2em; /* Ajustado */
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+.nav-btns {
+    display: flex;
+    gap: 5px; /* Menor espaçamento */
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1em; /* Ajustado */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1); /* Efeito levemente menor */
+}
+
+/* Grade do calendário */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas */
+    width: 100%;
+    gap: 1px;
+    background-color: #e9ecef;
+    padding: 5px; /* Ajustado */
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px; /* Ajustado */
+    border-radius: 5px;
+}
+
+.calendar-day {
+    background: #fff;
+    text-align: center;
+    padding: 5px; /* Ajustado */
+    min-height: 40px; /* Ajustado */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.calendar-day:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+.event-day {
+    background-color: #ffc107;
+    border: 1px solid #ffa000;
+    color: #000;
+}
+
+.day-number {
+    font-size: 1em; /* Ajustado */
+    font-weight: bold;
+}
+
+.event-marker {
+    font-size: 0.7em; /* Ajustado */
+    color: red;
+}
+
+/* Modal de evento */
+.event-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1001;
+    width: 250px; /* Reduzido para encaixar bem na tela */
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.event-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.close-btn {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #d32f2f;
+}
+
+.event-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Formulário de Cadastro de Evento */
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px; /* Reduzido mais para encaixar melhor */
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
