@@ -253,3 +253,110 @@ main {
 .form-container button:hover {
     background-color: #0056b3;
 }
+
+/* Estilo para a página de eventos do mês */
+.event-list-container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-list-container h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.event-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.event-item p {
+    color: #495057;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.event-item button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.event-item button:hover {
+    background-color: #0056b3;
+}
+
+.event-item button:active {
+    background-color: #003f7f;
+}
+
+.event-item button.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.event-item button.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+.event-item button.edit-btn {
+    background-color: #ffc107;
+    color: black;
+}
+
+.event-item button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Adicionando ícones aos botões */
+.event-item button i {
+    margin-right: 5px;
+}
+
+/* Estilos para telas pequenas */
+@media (max-width: 600px) {
+    .event-item {
+        padding: 10px;
+    }
+
+    .event-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .event-item p {
+        font-size: 0.85rem;
+    }
+
+    .event-list-container {
+        padding: 15px;
+    }
+}

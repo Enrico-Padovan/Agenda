@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
+    // Função para resetar a navbar
     function resetarAtividadeNavbar() {
         const navItems = document.querySelectorAll(".nav-item");
         navItems.forEach(item => {
@@ -16,14 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Função para ativar item da navbar
     function ativarNavbarItem(item) {
         resetarAtividadeNavbar();
         item.classList.add("active");
     }
 
+    // Função para exibir o formulário de cadastro/edição de evento
     function exibirFormularioCadastro(evento = null) {
         const titulo = evento ? "Editar Evento" : "Cadastrar Evento";
-        const textoBotao = evento ? "Editar Evento" : "Cadastrar";
+        const textoBotao = evento ? "Atualizar Evento" : "Cadastrar";
         const nome = evento ? evento.titulo : "";
         const data = evento ? evento.data : "";
         const hora = evento ? evento.hora : "";
@@ -53,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Função para cadastrar evento
     function cadastrarEvento() {
         const nomeEvento = document.getElementById("nomeEvento").value;
         const dataEvento = document.getElementById("dataEvento").value;
@@ -72,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         exibirCalendario();
     }
 
+    // Função para atualizar um evento
     function atualizarEvento(id) {
         const nomeEvento = document.getElementById("nomeEvento").value;
         const dataEvento = document.getElementById("dataEvento").value;
@@ -90,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Função para excluir um evento
     function excluirEvento(id) {
         const index = eventos.findIndex(evento => evento.id === id);
         if (index !== -1) {
@@ -99,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Função para exibir o calendário
     function exibirCalendario() {
         const diasSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
         const primeiroDia = new Date(currentYear, currentMonth, 1).getDay();
@@ -137,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mainContainer.innerHTML = html;
     }
 
+    // Função para mudar o mês do calendário
     window.mudarMes = function (diferenca) {
         currentMonth += diferenca;
         if (currentMonth < 0) {
@@ -149,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         exibirCalendario();
     };
 
+    // Função para exibir eventos de um dia específico
     window.exibirEventosDoDia = function (data) {
         const eventosDoDia = eventos.filter(evento => evento.data === data);
 
@@ -176,51 +185,72 @@ document.addEventListener("DOMContentLoaded", function () {
         mainContainer.innerHTML = html;
     };
 
-    window.exibirEventosDoMes = function () {
-        const eventosDoMes = eventos.filter(evento => {
-            const dataEvento = new Date(evento.data);
-            return dataEvento.getMonth() === currentMonth && dataEvento.getFullYear() === currentYear;
-        });
+    // Função para editar evento
+    window.editarEvento = function (id) {
+        const evento = eventos.find(evento => evento.id === id);
+        if (evento) {
+            exibirFormularioCadastro(evento);
+        }
+    };
 
-        if (eventosDoMes.length === 0) {
-            mainContainer.innerHTML = `<p>Nenhum evento cadastrado para este mês.</p>`;
+    // Função para excluir evento
+    window.excluirEvento = function (id) {
+        const index = eventos.findIndex(evento => evento.id === id);
+        if (index !== -1) {
+            eventos.splice(index, 1);
+            alert("Evento excluído com sucesso!");
+            exibirCalendario();
+        }
+    };
+
+    // Função para exibir todos os eventos do mês
+    function exibirEventosMes() {
+        if (eventos.length === 0) {
+            alert("Não há eventos para este mês.");
             return;
         }
 
         let html = `<div class="event-list-container">`;
 
-        eventosDoMes.forEach(evento => {
-            html += `
-                <div class="event-item">
-                    <h3>${evento.titulo}</h3>
-                    <p><strong>Data:</strong> ${evento.data}</p>
-                    <p><strong>Hora:</strong> ${evento.hora}</p>
-                    <p><strong>Descrição:</strong> ${evento.descricao}</p>
-                    <button onclick="editarEvento(${evento.id})">Editar</button>
-                    <button onclick="excluirEvento(${evento.id})">Excluir</button>
-                </div>
-            `;
+        eventos.forEach(evento => {
+            const eventoData = new Date(evento.data);
+            // Verifica se o evento é do mês e ano atual
+            if (eventoData.getMonth() === currentMonth && eventoData.getFullYear() === currentYear) {
+                html += `
+                    <div class="event-item">
+                        <h3>${evento.titulo}</h3>
+                        <p><strong>Data:</strong> ${evento.data}</p>
+                        <p><strong>Hora:</strong> ${evento.hora}</p>
+                        <p><strong>Descrição:</strong> ${evento.descricao}</p>
+                        <button onclick="editarEvento(${evento.id})">Editar</button>
+                        <button onclick="excluirEvento(${evento.id})">Excluir</button>
+                    </div>
+                `;
+            }
         });
 
         html += `</div>`;
         mainContainer.innerHTML = html;
-    };
-    function editarEvento(id) {
-        const evento = eventos.find(evento => evento.id === id);
-        if (evento) {
-            exibirFormularioCadastro(evento);
-        }
     }
 
+    // Função de clique do botão de cadastrar evento
     btnCadastrarEvento.addEventListener("click", function () {
         ativarNavbarItem(btnCadastrarEvento);
         exibirFormularioCadastro();
     });
 
+    // Função de clique do botão de calendário
     btnCalendario.addEventListener("click", function () {
         ativarNavbarItem(btnCalendario);
         exibirCalendario();
     });
 
+    // Função de clique do botão de eventos do mês
+    btnEventosMes.addEventListener("click", function () {
+        ativarNavbarItem(btnEventosMes);
+        exibirEventosMes();
+    });
+
+    // Exibe o calendário ao carregar
     exibirCalendario();
 });
